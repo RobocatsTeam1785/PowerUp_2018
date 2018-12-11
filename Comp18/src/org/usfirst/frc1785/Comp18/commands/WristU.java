@@ -12,6 +12,10 @@
 package org.usfirst.frc1785.Comp18.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc1785.Comp18.Robot;
+import org.usfirst.frc1785.Comp18.subsystems.Wrist;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 
 /**
  *
@@ -38,12 +42,30 @@ public class WristU extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	Robot.wrist.upWrist();
+    	double up=.7;
+    	double down=-.7;
+    	double stop=0;
+    	if(Robot.oi.xbox.getYButtonPressed()==true) {
+    		Wrist.wrist.set(ControlMode.PercentOutput, up, DemandType.ArbitraryFeedForward,0);
+    	}
+    	else if(Robot.oi.xbox.getYButtonReleased()==true) {
+    		Wrist.wrist.set(ControlMode.PercentOutput, stop, DemandType.ArbitraryFeedForward,0);
+    	}
+    	
+    	if(Robot.oi.xbox.getBButton()==true) {
+    		Wrist.wrist.set(ControlMode.PercentOutput, down, DemandType.ArbitraryFeedForward,0);
+    	}
+    	else if(Robot.oi.xbox.getBButtonReleased()==true) {
+    		Wrist.wrist.set(ControlMode.PercentOutput, stop, DemandType.ArbitraryFeedForward,0);
+    	}
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -55,7 +77,7 @@ public class WristU extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    	Robot.wrist.wristStop();
+    	
     }
 
     // Called when another command which requires one or more of the same

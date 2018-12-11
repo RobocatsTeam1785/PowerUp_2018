@@ -44,10 +44,29 @@ public class DriveTainC extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	Robot.driveTainS.acadeDrive(Robot.oi.xbox.getY(GenericHID.Hand.kLeft), Robot.oi.xbox.getX(GenericHID.Hand.kRight),
+    	double forward=Robot.oi.xbox.getY(GenericHID.Hand.kLeft);
+    	double turn=Robot.oi.xbox.getX(GenericHID.Hand.kRight);
+    	forward = Deadband(forward);
+		turn = Deadband(turn);
+    	
+    	
+    	Robot.driveTainS.acadeDrive(forward, -turn,
     			Robot.oi.xbox.getXButton());
+    	
+    	
     }
-
+    double Deadband(double value) {
+		/* Upper deadband */
+		if (value >= +0.1) 
+			return value;
+		
+		/* Lower deadband */
+		if (value <= -0.1)
+			return value;
+		
+		/* Outside deadband */
+		return 0;
+	}
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {

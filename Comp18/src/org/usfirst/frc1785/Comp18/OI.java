@@ -92,26 +92,28 @@ public class OI {
         
         
         startbutton = new JoystickButton(xbox, 8);
-        startbutton.whenPressed(new ArmD());
+        
         
         backbutton = new JoystickButton(xbox, 7);
-        backbutton.whenPressed(new ClawD());
+        
         
         rBbutton = new JoystickButton(xbox, 6);
         rBbutton.whenPressed(new ArmU());
         
         lBbutton = new JoystickButton(xbox, 5);
-        lBbutton.whenPressed(new WristD());
+        lBbutton.whenPressed(new ArmD());
         
         ybutton = new JoystickButton(xbox, 4);
-        ybutton.whenPressed(new WristU());
+        //ybutton.whileHeld(new WristU());
         
         
         xbutton = new JoystickButton(xbox, 3);
         xbutton.whenPressed(new LowGear());
         
+        
         bbutton = new JoystickButton(xbox, 2);
-        bbutton.whileHeld(new ClawU());
+        //bbutton.whileHeld(new ClawU());
+        //bbutton.whileHeld(new WristD());
         
         abutton = new JoystickButton(xbox, 1);
         abutton.whenPressed(new HighGear());
